@@ -1,10 +1,11 @@
 {
   "name": "fontmachine",
   "version": "0.0.0",
-  "description": "",
+  "description": "Make GL-ready pbfs and metadata for usage in fontstack API.",
   "main": "index.js",
   "scripts": {
-    "test": "jshint *.js & tape test/test.js"
+    "test": "jshint *.js & tape test/test.js",
+    "docs": "dox -r < index.js | doxme --readme > README.md"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,8 @@
     "queue-async": "^1.0.7"
   },
   "devDependencies": {
+    "dox": "^0.6.1",
+    "doxme": "^1.4.3",
     "tape": "^3.5.0"
   }
 }
