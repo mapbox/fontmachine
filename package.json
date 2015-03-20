@@ -1,0 +1,18 @@
+{
+  "name": "fontmachine",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jshint *.js & tape test/test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fontnik": "^1.0.0",
+    "queue-async": "^1.0.7"
+  },
+  "devDependencies": {
+    "tape": "^3.5.0"
+  }
+}
