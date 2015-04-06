@@ -12,7 +12,7 @@ necessary for Mapbox GL fontstacks.
 
 | parameter  | type                                                                      | description                                                 |
 | ---------- | ------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| `opts`     | { font: <a href="Buffer.html">Buffer</a>, filetype: <code>String</code> } | An object with a font file and its file type (e.g. `.ttf`). |
+| `opts`     | { font: Buffer, filetype: <code>String</code> } | An object with a font file and its file type (e.g. `.ttf`). |
 | `callback` | Function                                                                  | Callback should take arguments (error, result).             |
 
 
@@ -21,7 +21,7 @@ necessary for Mapbox GL fontstacks.
 * {String} font.fontname The name of this font (concatenated family_name + style_name).
 * {Array} font.stack An array of {name: filename, data: buffer} objects with SDF PBFs covering points 0-65535.
 * {Object} font.metadata An object where `data` is a stringified codepoints result.
-* {Object} font.original An object containing the original font file (named "original.{extname}")
+* {Object} font.original An object containing the original font file (named "original{.filetype}")
 
 ## Installation
 
