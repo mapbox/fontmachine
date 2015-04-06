@@ -3,17 +3,17 @@
 Make GL-ready pbfs and metadata for usage in fontstack API.
 
 
-### `makeGlyphs(file, callback)`
+### `makeGlyphs(opts, callback)`
 
 Make all metadata (codepoints) and SDF PBFs
 necessary for Mapbox GL fontstacks.
 
 ### Parameters
 
-| parameter  | type     | description                                     |
-| ---------- | -------- | ----------------------------------------------- |
-| `file`     | String   | A path to a font file.                          |
-| `callback` | Function | Callback should take arguments (error, result). |
+| parameter  | type                                                                      | description                                                 |
+| ---------- | ------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| `opts`     | { font: <a href="Buffer.html">Buffer</a>, filetype: <code>String</code> } | An object with a font file and its file type (e.g. `.ttf`). |
+| `callback` | Function                                                                  | Callback should take arguments (error, result).             |
 
 
 
