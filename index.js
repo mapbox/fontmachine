@@ -62,7 +62,7 @@ fontmachine.makeGlyphs = function(opts, callback) {
                 if (err) return done(err);
                 stack.push({
                     name: name,
-                    data: data
+                    data: res
                 });
                 return done(null, res);
             });
