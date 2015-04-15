@@ -2,8 +2,7 @@ var tape = require('tape');
 var fontmachine = require('../index.js');
 var path = require('path');
 var fs = require('fs');
-var opensans = fs.readFileSync(path.resolve(__dirname + '/fixtures/open-sans/OpenSans-Regular.ttf'));
-var firasans = fs.readFileSync(path.resolve(__dirname + '/fixtures/firasans-medium/FiraSans-Medium.ttf'));
+var opensans = fs.readFileSync(path.resolve(path.join(__dirname, '/fixtures/open-sans/OpenSans-Regular.ttf')));
 
 tape('font machine', function(t) {
     fontmachine.makeGlyphs({font: opensans, filetype: '.ttf'}, function(err, res) {

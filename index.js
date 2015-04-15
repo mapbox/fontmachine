@@ -1,8 +1,6 @@
 var fontnik = require('fontnik');
 var queue = require('queue-async');
 var zlib = require('zlib');
-var path = require('path');
-var fs = require('fs');
 
 var fontmachine = module.exports = {};
 

@@ -1,5 +1,7 @@
 # fontmachine
 
+[![build status](https://secure.travis-ci.org/mapbox/fontmachine.png)](http://travis-ci.org/mapbox/fontmachine)
+
 Make GL-ready pbfs and metadata for usage in fontstack API.
 
 
