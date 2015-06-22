@@ -21,15 +21,10 @@ fontmachine.makeGlyphs = function(opts, callback) {
     var stack = [];
     fontnik.load(opts.font, function(err, faces) {
         if (err) return callback(err);
-        // temp workaround: fill this out
+
         if (faces.length > 1) throw new Error('woah multifont!');
 
         var metadata = faces[0];
-        var name = [metadata.family_name, metadata.style_name].join(' ');
-
-        var codepoints = JSON.stringify({
-            body: metadata.points
-        });
 
         for (var i = 0; i < 65536; (i = i + 256)) {
             q.defer(writeGlyphs, opts.font, i, Math.min(i + 255, 65535));
@@ -38,12 +33,16 @@ fontmachine.makeGlyphs = function(opts, callback) {
         q.awaitAll(function(err) {
             if (err) return callback(err);
             return callback(null, {
-                fontname: name,
+                name: [metadata.family_name, metadata.style_name].join(' '),
                 stack: stack,
-                metadata: {
-                    name: name + '.json',
-                    data: codepoints
-                },
+                metadata: Object.keys(metadata).reduce(function(prev, key, index) {
+                    if (key !== 'points') {
+                        prev[key] = metadata[key];
+                    }
+
+                    return prev;
+                }, {}),
+                codepoints: metadata.points,
                 original: {
                     name: 'original' + opts.filetype,
                     data: opts.font
