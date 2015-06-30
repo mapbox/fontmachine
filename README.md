@@ -1,9 +1,10 @@
 # fontmachine
 
-[![build status](https://secure.travis-ci.org/mapbox/fontmachine.png)](http://travis-ci.org/mapbox/fontmachine)
+[![NPM](https://nodei.co/npm/fontmachine.png)](https://npmjs.org/package/fontmachine)
 
-Make GL-ready pbfs and metadata for usage in fontstack API.
+[![Build Status](https://travis-ci.org/mapbox/fontmachine.svg?branch=master)](https://travis-ci.org/mapbox/fontmachine)
 
+Make GL-ready PBFs and metadata for use in glyphs API.
 
 ### `makeGlyphs(opts, callback)`
 
