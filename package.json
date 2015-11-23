@@ -10,14 +10,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "fontnik": "^0.3.2",
+    "fontnik": "^0.4.0",
     "queue-async": "^1.0.7"
   },
   "devDependencies": {
-    "dox": "^0.6.1",
-    "doxme": "^1.4.3",
+    "dox": "^0.8.0",
+    "doxme": "^1.8.2",
     "glyph-pbf-composite": "0.0.2",
-    "jshint": "^2.8.0",
-    "tape": "^3.5.0"
+    "jshint": "^2.9.1-rc1",
+    "tape": "^4.2.2"
   }
 }
