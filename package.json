@@ -1,6 +1,6 @@
 {
   "name": "fontmachine",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Make GL-ready pbfs and metadata for usage in fontstack API.",
   "main": "index.js",
   "scripts": {
