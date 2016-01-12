@@ -4,7 +4,30 @@ var path = require('path');
 var zlib = require('zlib');
 var fs = require('fs');
 var glyphComposite = require('glyph-pbf-composite');
-var opensans = fs.readFileSync(path.resolve(path.join(__dirname, '/fixtures/open-sans/OpenSans-Regular.ttf')));
+var opensans = fs.readFileSync(path.resolve(path.join(__dirname, '/fixtures/fonts/open-sans/OpenSans-Regular.ttf')));
+var guardianbold = fs.readFileSync(path.resolve(path.join(__dirname, '/fixtures/fonts/GuardianTextSansWeb/GuardianTextSansWeb-Bold.ttf')));
+
+tape('handle undefined style_name', function(t) {
+    fontmachine.makeGlyphs({font: guardianbold, filetype: '.ttf'}, function(err, font) {
+        t.ifError(err);
+        t.ok(font, 'returns a font');
+        t.equal(font.name, '?');
+        t.ok(font.metadata, 'metadata exists');
+        t.ok(font.metadata instanceof Object, 'metadata is object');
+        t.equal(font.metadata.family_name, '?');
+        t.equal(font.metadata.style_name, undefined);
+        t.ok(font.codepoints, 'codepoints exists');
+        t.ok(Array.isArray(font.codepoints), 'codepoints is array');
+        t.equal(font.codepoints.length, 227, 'right number of codepoints');
+        t.ok(font.original, 'original font file exists');
+        t.equal(font.original.name, 'original.ttf');
+        t.deepEqual(font.original.data, guardianbold, 'Font files equal eachother');
+        t.ok(font.stack, 'pbf stack exists');
+        t.equal(font.stack.length, 256, 'font stack has the right size');
+        t.ok(Array.isArray(font.stack), 'pbf stack is array');
+        t.end();
+    });
+});
 
 tape('font machine 256-511', function(t) {
     fontmachine.makeGlyphs({font: opensans, filetype: '.ttf'}, function(err, font) {
@@ -16,7 +39,6 @@ tape('font machine 256-511', function(t) {
         t.equal(font.metadata.family_name, 'Open Sans');
         t.equal(font.metadata.style_name, 'Regular');
         t.ok(font.codepoints, 'codepoints exists');
-        console.log(font.codepoints);
         t.ok(Array.isArray(font.codepoints), 'codepoints is array');
         t.equal(font.codepoints.length, 882, 'right number of codepoints');
         t.ok(font.original, 'original font file exists');
