@@ -11,7 +11,7 @@ var fontmachine = module.exports = {};
  * @param {Function} callback Callback should take arguments (error, result).
  * @returns {Object} font An object containing all files and data.
  *
- * * {String} font.fontname The name of this font (concatenated family_name + smtyle_name).
+ * * {String} font.fontname The name of this font (concatenated family_name + style_name).
  * * {Array} font.stack An array of {name: filename, data: buffer} objects with SDF PBFs covering points 0-65535.
  * * {Object} font.metadata An object where `data` is a stringified codepoints result.
  * * {Object} font.original An object containing the original font file (named "original{.filetype}")
