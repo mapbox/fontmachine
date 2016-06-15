@@ -19,12 +19,12 @@ necessary for Mapbox GL fontstacks.
 
 
 
-**Returns** `Object`, font An object containing all files and data.
-{String} font.name The name of this font (concatenated family_name + style_name).
-{Array} font.stack An array of {name: filename, data: buffer} objects with SDF PBFs covering points 0-65535.
-{Object} font.metadata An object containing the metadata (family_name and style_name) of the font .
-{Object} font.codepoints An object where `data` is a stringified codepoints result.
-{Object} font.original An object containing the original font file (named "original{.filetype}").
+**Returns** `Object`, font An object containing all files and data.  
+{String} font.name The name of this font (concatenated family_name + style_name).  
+{Array} font.stack An array of {name: filename, data: buffer} objects with SDF PBFs covering points 0-65535.  
+{Object} font.metadata An object containing the metadata (family_name and style_name) of the font.  
+{Object} font.codepoints An object where `data` is a stringified codepoints result.  
+{Object} font.original An object containing the original font file (named "original{.filetype}").  
 
 ## Installation
 
