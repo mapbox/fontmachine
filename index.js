@@ -61,10 +61,14 @@ function makeGlyphs(opts, callback) {
 
     function writeGlyphs(font, start, end, done) {
         fontnik.range({font: font, start: start, end: end}, function(err, data) {
-            if (err) return done(err);
+            if (err) {
+                return done(err);
+            }
             var name = [start, '-', end, '.pbf'].join('');
             zlib.gzip(data, function(err, res) {
-                if (err) return done(err);
+                if (err) {
+                    return done(err);
+                }
                 stack.push({
                     name: name,
                     data: res

@@ -1,4 +1,4 @@
-var tape = require('tape');
+var test = require('tap').test;
 var fontmachine = require('../index.js');
 var path = require('path');
 var zlib = require('zlib');
@@ -6,8 +6,10 @@ var fs = require('fs');
 var glyphComposite = require('glyph-pbf-composite');
 var opensans = fs.readFileSync(path.resolve(path.join(__dirname, '/fixtures/fonts/open-sans/OpenSans-Regular.ttf')));
 var guardianbold = fs.readFileSync(path.resolve(path.join(__dirname, '/fixtures/fonts/GuardianTextSansWeb/GuardianTextSansWeb-Bold.ttf')));
+var noto = fs.readFileSync(path.resolve(path.join(__dirname, '/fixtures/fonts/noto/NotoSans-Regular.ttc')));
+var invalid = fs.readFileSync(path.resolve(path.join(__dirname, '/fixtures/fonts/invalid/foo.ttf')));
 
-tape('handle undefined style_name', function(t) {
+test('handle undefined style_name', function(t) {
     fontmachine.makeGlyphs({font: guardianbold, filetype: '.ttf'}, function(err, font) {
         t.ifError(err);
         t.ok(font, 'returns a font');
@@ -29,28 +31,44 @@ tape('handle undefined style_name', function(t) {
     });
 });
 
-tape('handle api misuse opts.font', function(t) {
+test('handle api misuse opts.font', function(t) {
     t.throws(function() {
         fontmachine.makeGlyphs({font: 'STRING'});
     }, /opts.font must be a Buffer/);
     t.end()
 });
 
-tape('handle api misuse opts.filetype', function(t) {
+test('handle api misuse opts.filetype', function(t) {
     t.throws(function() {
         fontmachine.makeGlyphs({font: new Buffer(0), filetype: null});
     }, /opts.filetype must be a String/);
     t.end()
 });
 
-tape('handle api misuse callback', function(t) {
+test('handle api misuse callback', function(t) {
     t.throws(function() {
         fontmachine.makeGlyphs({font: new Buffer(0), filetype: '.ttf'}, 'callback');
     }, /Callback must be a Function/);
     t.end()
 });
 
-tape('font machine 256-511', function(t) {
+test('handle not a font file', function(t) {
+    fontmachine.makeGlyphs({font: invalid, filetype: '.ttf'}, function(err, font) {
+        t.ok(err);
+        t.equal(err.message, 'could not open font file', 'Handles file that is not a font');
+        t.end();
+    });
+});
+
+test('handle multifont', function(t) {
+    fontmachine.makeGlyphs({font: noto, filetype: '.ttc'}, function(err, font) {
+        t.ok(err);
+        t.equal(err.message, 'Multiple faces in a font are not yet supported.', 'Calls callback with an error');
+        t.end();
+    });
+});
+
+test('font machine 256-511', function(t) {
     fontmachine.makeGlyphs({font: opensans, filetype: '.ttf'}, function(err, font) {
         t.ifError(err);
         t.ok(font, 'returns a font');
@@ -97,7 +115,7 @@ tape('font machine 256-511', function(t) {
     });
 });
 
-tape('font machine 7680-7935', function(t) {
+test('font machine 7680-7935', function(t) {
     fontmachine.makeGlyphs({font: opensans, filetype: '.ttf'}, function(err, font) {
         t.ifError(err);
         var stack512 = font.stack.filter(function(stack) {
