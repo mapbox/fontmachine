@@ -2,27 +2,35 @@ var fontnik = require('fontnik');
 var queue = require('queue-async');
 var zlib = require('zlib');
 
-var fontmachine = module.exports = {};
 
 /**
  * Make all metadata (codepoints) and SDF PBFs
  * necessary for Mapbox GL fontstacks.
  * @param {{font: Buffer, filetype: String}} opts An object with a font file and its file type (e.g. `.ttf`).
  * @param {Function} callback Callback should take arguments (error, result).
- * @returns {Object} font An object containing all files and data.
+ * @returns {undefined} calls callback
  *
  * * {String} font.fontname The name of this font (concatenated family_name + style_name).
  * * {Array} font.stack An array of {name: filename, data: buffer} objects with SDF PBFs covering points 0-65535.
  * * {Object} font.metadata An object where `data` is a stringified codepoints result.
  * * {Object} font.original An object containing the original font file (named "original{.filetype}")
  */
-fontmachine.makeGlyphs = function(opts, callback) {
+function makeGlyphs(opts, callback) {
     var q = queue();
     var stack = [];
-    fontnik.load(opts.font, function(err, faces) {
-        if (err) return callback(err);
 
-        if (faces.length > 1) throw new Error('woah multifont!');
+    if (!(opts.font instanceof Buffer)) throw new Error('opts.font must be a Buffer');
+    if (typeof opts.filetype !== 'string') throw new Error('opts.filetype must be a String');
+    if (!(callback instanceof Function)) throw new Error('Callback must be a Function');
+
+    fontnik.load(opts.font, function(err, faces) {
+        if (err) {
+            return callback(err);
+        }
+
+        if (faces.length > 1) {
+            return callback(new Error('Multiple faces in a font are not yet supported.'));
+        }
 
         var metadata = faces[0];
 
@@ -65,4 +73,6 @@ fontmachine.makeGlyphs = function(opts, callback) {
             });
         });
     }
-};
+}
+
+module.exports.makeGlyphs = makeGlyphs;
