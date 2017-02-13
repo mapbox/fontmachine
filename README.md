@@ -1,6 +1,6 @@
 # fontmachine
 
-[![NPM](https://nodei.co/npm/fontmachine.png)](https://npmjs.org/package/fontmachine)
+[![NPM](https://nodei.co/npm/@mapbox/fontmachine.png)](https://npmjs.org/package/@mapbox/fontmachine)
 
 [![Build Status](https://travis-ci.org/mapbox/fontmachine.svg?branch=master)](https://travis-ci.org/mapbox/fontmachine)
 
@@ -31,7 +31,7 @@ necessary for Mapbox GL fontstacks.
 Requires [nodejs](http://nodejs.org/).
 
 ```sh
-$ npm install fontmachine
+$ npm install @mapbox/fontmachine
 ```
 
 ## Tests
