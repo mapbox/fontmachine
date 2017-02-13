@@ -16,7 +16,7 @@
   "devDependencies": {
     "dox": "^0.8.0",
     "doxme": "^1.8.2",
-    "glyph-pbf-composite": "0.0.2",
+    "@mapbox/glyph-pbf-composite": "0.0.2",
     "jshint": "^2.9.1-rc1",
     "tap": "6.2.0"
   }
