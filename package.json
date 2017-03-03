@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "fontnik": "^0.4.3",
+    "fontnik": "https://github.com/mapbox/node-fontnik/tarball/master",
     "queue-async": "^1.0.7"
   },
   "devDependencies": {
