@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "fontnik": "~0.5.0",
+    "fontnik": "^0.5.2",
     "queue-async": "^1.0.7"
   },
   "devDependencies": {
