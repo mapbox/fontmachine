@@ -1,3 +1,7 @@
+# v0.2.2
+
+- Upgraded node-fontnik from 0.5.0 to 0.5.2
+- Adds package-lock.json
 
 # v0.2.1
 
