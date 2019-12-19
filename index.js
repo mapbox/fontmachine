@@ -1,5 +1,5 @@
 var fontnik = require('fontnik');
-var queue = require('queue-async');
+var queue = require('d3-queue').queue;
 var zlib = require('zlib');
 
 

@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "fontnik": "^0.5.2",
-    "queue-async": "^1.0.7"
+    "d3-queue": "^3.0.7",
+    "fontnik": "^0.5.2"
   },
   "devDependencies": {
     "dox": "^0.8.0",
