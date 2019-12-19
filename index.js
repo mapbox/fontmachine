@@ -16,7 +16,8 @@ var zlib = require('zlib');
  * * {Object} font.original An object containing the original font file (named "original{.filetype}")
  */
 function makeGlyphs(opts, callback) {
-    var q = queue();
+    // undefined (unset concurrency) means unbounded concurrency in d3-queue
+    var q = queue(opts.concurrency);
     var stack = [];
 
     if (!(opts.font instanceof Buffer)) throw new Error('opts.font must be a Buffer');
