@@ -40,14 +40,14 @@ test('handle api misuse opts.font', function(t) {
 
 test('handle api misuse opts.filetype', function(t) {
     t.throws(function() {
-        fontmachine.makeGlyphs({font: new Buffer(0), filetype: null});
+        fontmachine.makeGlyphs({font: Buffer.alloc(0), filetype: null});
     }, /opts.filetype must be a String/);
     t.end()
 });
 
 test('handle api misuse callback', function(t) {
     t.throws(function() {
-        fontmachine.makeGlyphs({font: new Buffer(0), filetype: '.ttf'}, 'callback');
+        fontmachine.makeGlyphs({font: Buffer.alloc(0), filetype: '.ttf'}, 'callback');
     }, /Callback must be a Function/);
     t.end()
 });
