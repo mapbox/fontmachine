@@ -73,7 +73,7 @@ function makeGlyphs(opts, callback) {
                     name: name,
                     data: res
                 });
-                return done(null, res);
+                return done(null);
             });
         });
     }
