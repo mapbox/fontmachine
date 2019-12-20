@@ -1,6 +1,6 @@
 # @mapbox/fontmachine
 
-[![Build Status](https://travis-ci.org/mapbox/fontmachine.svg?branch=master)](https://travis-ci.org/mapbox/fontmachine)
+[![Build Status](https://travis-ci.org/mapbox/fontmachine.svg?branch=master)](https://travis-ci.org/mapbox/fontmachine) [![codecov](https://codecov.io/gh/mapbox/fontmachine/branch/master/graph/badge.svg)](https://codecov.io/gh/mapbox/fontmachine)
 
 Make GL-ready pbfs and metadata for usage in fontstack API.
 
