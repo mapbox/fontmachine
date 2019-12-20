@@ -2,10 +2,13 @@
   "name": "@mapbox/fontmachine",
   "version": "0.2.2",
   "description": "Make GL-ready pbfs and metadata for usage in fontstack API.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mapbox/fontmachine.git"
+  },
   "main": "index.js",
   "scripts": {
-    "test": "jshint *.js & tap --coverage test/test.js",
-    "docs": "dox -r < index.js | doxme --readme > README.md"
+    "test": "jshint *.js & tap --coverage test/test.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,8 +17,6 @@
     "fontnik": "^0.5.2"
   },
   "devDependencies": {
-    "dox": "^0.8.0",
-    "doxme": "^1.8.2",
     "@mapbox/glyph-pbf-composite": "0.0.2",
     "jshint": "^2.9.1-rc1",
     "tap": "6.2.0"

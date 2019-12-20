@@ -2,18 +2,20 @@ var fontnik = require('fontnik');
 var queue = require('d3-queue').queue;
 var zlib = require('zlib');
 
-
 /**
- * Make all metadata (codepoints) and SDF PBFs
- * necessary for Mapbox GL fontstacks.
- * @param {{font: Buffer, filetype: String}} opts An object with a font file and its file type (e.g. `.ttf`).
- * @param {Function} callback Callback should take arguments (error, result).
- * @returns {undefined} calls callback
+ * Make all metadata (codepoints) and SDF PBFs necessary for Mapbox GL fontstacks.
+ * @param {Object} opts Options object with required `font` and `filetype` properties, and any optional parameters.
+ * @param {Buffer} opts.font The font file as a `Buffer`.
+ * @param {string} opts.filetype Type of font (e.g. `'.ttf'` or `'.otf'`).
+ * @param {number} [opts.concurrency] Concurrency to use when processing font into PBFs. If `undefined`, concurrency is unbounded. 
+ * @param {function(err, result)} callback Callback takes arguments (`error`, `result`).
  *
- * * {String} font.fontname The name of this font (concatenated family_name + style_name).
- * * {Array} font.stack An array of {name: filename, data: buffer} objects with SDF PBFs covering points 0-65535.
- * * {Object} font.metadata An object where `data` is a stringified codepoints result.
- * * {Object} font.original An object containing the original font file (named "original{.filetype}")
+ * **Callback `result`:**
+ * * `{string}` `name` The name of this font (concatenated family_name + style_name).
+ * * `{Array}` `stack` An array of `{name: filename, data: buffer}` objects with SDF PBFs covering points 0-65535.
+ * * `{Object}` `metadata` An object where `data` is a stringified codepoints result.
+ * * `{name: string, data: Buffer}` `original` An object containing the original font file (named `"original{.filetype}"`)
+ *
  */
 function makeGlyphs(opts, callback) {
     // undefined (unset concurrency) means unbounded concurrency in d3-queue
