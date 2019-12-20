@@ -8,17 +8,26 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "jshint *.js & tap --coverage test/test.js"
+    "lint": "eslint **/*.js",
+    "test": "npm run lint && tap --coverage test/test.js"
   },
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=8"
+  },
   "dependencies": {
     "d3-queue": "^3.0.7",
     "fontnik": "^0.5.2"
   },
   "devDependencies": {
+    "@mapbox/eslint-config-mapbox": "^2.0.1",
     "@mapbox/glyph-pbf-composite": "0.0.2",
-    "jshint": "^2.9.1-rc1",
+    "eslint": "^6.7.2",
+    "eslint-plugin-node": "^10.0.0",
     "tap": "6.2.0"
+  },
+  "eslintConfig": {
+    "extends": "@mapbox/eslint-config-mapbox"
   }
 }
