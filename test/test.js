@@ -1,10 +1,15 @@
 'use strict';
 
-const test = require('tap').test;
-const fontmachine = require('../index.js');
+const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
-const fs = require('fs');
+
+const sinon = require('sinon');
+const test = require('tap').test;
+const fontnik = require('fontnik');
+const rewire = require('rewire');
+const fontmachine = rewire('../index.js');
+
 const glyphComposite = require('@mapbox/glyph-pbf-composite');
 const opensans = fs.readFileSync(path.resolve(path.join(__dirname, '/fixtures/fonts/open-sans/OpenSans-Regular.ttf')));
 const guardianbold = fs.readFileSync(path.resolve(path.join(__dirname, '/fixtures/fonts/GuardianTextSansWeb/GuardianTextSansWeb-Bold.ttf')));
@@ -67,6 +72,32 @@ test('handle multifont', (t) => {
     t.ok(err);
     t.equal(err.message, 'Multiple faces in a font are not yet supported.', 'Calls callback with an error');
     t.end();
+  });
+});
+
+test('calls-back with fontnik.range error', (t) => {
+  const mockError = new Error();
+  sinon.stub(fontnik, 'range').callsFake((_, cb) => cb(mockError));
+
+  fontmachine.makeGlyphs({ font: opensans, filetype: '.ttf' }, (err, font) => {
+    t.ok(err, 'has an error');
+    t.equal(err, mockError, 'error passed along from fontnik.range');
+    t.notOk(font, 'does not have font result');
+    sinon.restore();
+    t.done();
+  });
+});
+
+test('calls-back with zlib.gzip error', (t) => {
+  const mockError = new Error();
+  sinon.stub(zlib, 'gzip').callsFake((_, cb) => cb(mockError));
+
+  fontmachine.makeGlyphs({ font: opensans, filetype: '.ttf' }, (err, font) => {
+    t.ok(err, 'has an error');
+    t.equal(err, mockError, 'error passed along from zlib.gzip');
+    t.notOk(font, 'does not have font result');
+    sinon.restore();
+    t.done();
   });
 });
 
@@ -146,5 +177,38 @@ test('font machine 7680-7935', (t) => {
       t.equal(decodedStack.stacks[0].glyphs[75].advance, 14, 'correct 76th advance');
       t.end();
     });
+  });
+});
+
+test('can set processing concurrency', (t) => {
+  const opts = {
+    font: opensans,
+    filetype: '.ttf',
+    concurrency: 1 // process glyph ranges serially
+  };
+
+  const writeGlyphs = fontmachine.__get__('writeGlyphs');
+  const writeGlyphsSpy = sinon.spy(writeGlyphs);
+  const unset = fontmachine.__set__('writeGlyphs', writeGlyphsSpy);
+
+  fontmachine.makeGlyphs(opts, (err, font) => {
+    t.ifError(err);
+    t.ok(font, 'returns a font');
+
+    t.ok(writeGlyphsSpy.called, 'writeGlyphs is called');
+
+    const calls = writeGlyphsSpy.getCalls();
+    t.equal(calls.length, 256, 'writeGlyphs called expected number of times');
+
+    for (let i = 0; i < calls.length; i++) {
+      // ensure that all calls to writeSpy were processed in sequential order
+      const call = calls[i];
+      t.equal(call.args[1], i * 256, 'start argument');
+      t.equal(call.args[2], (i + 1) * 256 - 1, 'end argument');
+    }
+
+    unset();
+    sinon.restore();
+    t.done();
   });
 });

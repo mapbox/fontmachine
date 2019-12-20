@@ -27,7 +27,7 @@ Make all metadata (codepoints) and SDF PBFs necessary for Mapbox GL fontstacks.
 | `stack`    | `Array<{name: string, data: Buffer}>` | An array of 256 `{name: filename, data: buffer}` objects with SDF PBFs covering points 0-65535. |
 | `metadata` | `{family_name: string, style_name: string}`                              | Metadata about the font.                                  |
 | `codepoints` | `Array<int>` | Array of codepoints covered by the font.
-| `original` | `{name: string, data: Buffer}`        | An object containing the original font file (named `'original.<filetype>'`)                 |
+| `original` | `{name: string, data: Buffer}`        | An object containing the original font file (named `'original<filetype>'`)                 |
 
 ## Installation
 
