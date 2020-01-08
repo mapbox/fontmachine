@@ -4,7 +4,7 @@
 
 Make GL-ready pbfs and metadata for usage in fontstack API.
 
-### `makeGlyphs(opts, opts.font, opts.filetype, [opts.concurrency], callback)`
+### `makeGlyphs(opts, callback)`
 
 Make all metadata (codepoints) and SDF PBFs necessary for Mapbox GL fontstacks.
 
