@@ -1,6 +1,8 @@
-# @mapbox/fontmachine
+# DEPRECATED @mapbox/fontmachine
 
 [![Build Status](https://travis-ci.org/mapbox/fontmachine.svg?branch=master)](https://travis-ci.org/mapbox/fontmachine) [![codecov](https://codecov.io/gh/mapbox/fontmachine/branch/master/graph/badge.svg)](https://codecov.io/gh/mapbox/fontmachine)
+
+:warning: This code is deprecated, which means it is no longer maintained and will not receive updates. Instead of this library, we recommend using node-[fontnik directly](https://github.com/mapbox/node-fontnik).
 
 Make GL-ready pbfs and metadata for usage in fontstack API.
 
